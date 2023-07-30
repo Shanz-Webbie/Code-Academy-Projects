@@ -39,7 +39,7 @@ class LinkedList:
         return string_list
 
 
-# Test your code by uncommenting the statements below - did your list print to the terminal?
+# tests your code by uncommenting the statements below - did your list print to the terminal?
 ll = LinkedList(5)
 ll.insert_beginning(70)
 ll.insert_beginning(5675)

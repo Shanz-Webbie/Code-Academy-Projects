@@ -14,7 +14,7 @@ def score_word(word):
     point_total += letter_to_points.get(letter, 0)
   return point_total
 
-#Test the function on the word "Brownie"
+#tests the function on the word "Brownie"
 brownie_points = score_word("BROWNIE")
 
 #print(brownie_points)
