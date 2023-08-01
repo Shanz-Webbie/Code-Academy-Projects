@@ -8,4 +8,3 @@ class Book:
     genre: str
     publish_date: datetime
 
-
