@@ -1,7 +1,6 @@
-import pytest
-from unittest.mock import patch
+from Portfolio_Project.Book import Book
 from Portfolio_Project.User_Responses import UserDrivenResponses
-from tests.recommendations import get_recommendations
+from Portfolio_Project.recommendations import get_recommendations
 
 def test_get_recommendations_returns_books():
 
@@ -11,4 +10,8 @@ def test_get_recommendations_returns_books():
         UserWantsRecentlyPublished= True,
         DoesUserWantStaffRecommendations= True)
 
-    get_recommendations(responses)
+    actual = get_recommendations(responses)
+
+    assert isinstance(actual, list)
+    assert len(actual) > 0
+    assert isinstance(actual[0], Book)
