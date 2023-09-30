@@ -23,10 +23,11 @@ class NYTimesApi:
         if offset is not None:
             pass
         response = requests.get(url, params=params)
-        return response.json()
+        full_response_json = response.json()
+        return full_response_json['results']
 
     def get_all_list_names(self) -> list[str]:
-        nytimes_lists_response_dict =  self.get_nytimes_lists()
+        nytimes_lists_response_dict = self.get_nytimes_lists()
         list_of_names = []
         for item in nytimes_lists_response_dict['results']:
             encoded_list = item['list_name_encoded']
