@@ -2,9 +2,18 @@ from Portfolio_Project.nytimes import NYTimesApi
 import pytest
 
 
+def get_api_key_filepath():
+    return "/Users/shanz/PycharmProjects/Code-Academy/.api_key"
+
+
+def get_api_key():
+    with open(get_api_key_filepath()) as api_key_file:
+        return api_key_file.read()
+
+
 @pytest.fixture(autouse=True)
-def fake_api_key(monkeypatch): #ToDo get token from another place
-    monkeypatch.setenv('NYTIMES_API_KEY', '')
+def fake_api_key(monkeypatch):
+    monkeypatch.setenv('NYTIMES_API_KEY', get_api_key())
 
 @pytest.fixture
 def subject():
