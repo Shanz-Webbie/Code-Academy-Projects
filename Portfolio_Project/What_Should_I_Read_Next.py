@@ -1,8 +1,10 @@
-from Book import book
+from Book import Book
+
 
 def greet():
-    print("Hi there and welcome to the book recommendation library!\n"")
+    print("Hi there and welcome to the book recommendation library!\n")
     print("We'll help you find the perfect book to read next")
+
 
 def get_genre(book, genre):
     book_genre = input("Would you like to read a fiction or nonfiction book?")
