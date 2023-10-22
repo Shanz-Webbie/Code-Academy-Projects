@@ -1,4 +1,4 @@
-from Portfolio_Project.nytimes import NYTimesApi
+from Portfolio_Project.nytimes import NYTimesBookRepositoryAdapter
 import pytest
 
 
@@ -17,12 +17,12 @@ def fake_api_key(monkeypatch):
 
 @pytest.fixture
 def subject():
-    test_subject = NYTimesApi(api_key=None)
+    test_subject = NYTimesBookRepositoryAdapter(api_key=None)
     yield test_subject
 
 
 def test_get_all_list_names_returns_list_of_strings(subject):
-    actual = subject.get_all_list_names()
+    actual = subject.get_all_genres()
     assert isinstance(actual, list)
     assert len(actual) > 0
     assert all([isinstance(item, str) for item in actual])
