@@ -1,12 +1,12 @@
-from abc import ABC
-
+from Book import Book
 import requests
 import os
+from BookMarshaller import BookMarshaller
 from book_repository import AbstractBookRepository
 
 
 class NYTimesBookRepositoryAdapter(AbstractBookRepository):
-    def __init__(self, api_key = None):
+    def __init__(self, api_key=None):
         if api_key is None:
             api_key = os.getenv('NYTIMES_API_KEY')
         self.api_key = api_key
@@ -41,14 +41,22 @@ class NYTimesBookRepositoryAdapter(AbstractBookRepository):
             list_of_names.append(encoded_list)
         return list_of_names
 
+    def get_books_for_genre(self, genre: str) -> list[Book]:
+        books_in_genre_json = self.get_list_of_books(list_id=genre)
+        book_marshaller = BookMarshaller()
+        converted_books = []
+        for book_dict in books_in_genre_json:
+            marshalled_book = book_marshaller.marshall(book_dict)
+            converted_books.append(marshalled_book)
+        return converted_books
 
 
 
 def main():
     nytimes_api = NYTimesBookRepositoryAdapter(api_key=None)
     lists_json = nytimes_api.get_nytimes_lists()
-    lists_books = nytimes_api.get_list_of_books(list_id='hardcover-fiction')
-    print(lists_json)
+    lists_books = nytimes_api.get_books_for_genre(genre='hardcover-fiction')
+    print(lists_books)
     #print(lists_books)
 
 if __name__ == '__main__':
